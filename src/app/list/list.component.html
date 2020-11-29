@@ -1,0 +1,25 @@
+<div class="container">
+    <!--Header--------------------------------------------------------------------->
+    <h2>My ToDo List</h2>
+
+    <!--Added Task--------------------------------------------------------------------->
+    <div>
+        <input [(ngModel)]="newTask" type="text" value="" style="width:300px;">
+        <button (click)="addToList()" class="btn btn-light text-success">
+            ADD TASK
+        </button>
+    </div>
+
+    <!--Show Tasks--------------------------------------------------------------------->
+    <table class="show">
+
+        <tr *ngFor="let x of items; let index = index;">
+            <td class="message">
+                <div class="col-9 text-light h3">{{x}}</div>
+            </td>
+            <td><input (click)="deleteTask(index)" type="button" value="Delete" class="col-2 btn btn-danger">
+            </td>
+        </tr>
+
+    </table>
+</div>
