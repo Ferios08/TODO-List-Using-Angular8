@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: window["env"]["apiUrl"] || 'http://localhost:5000'
+  environment: $ENV.ENVIRONMENT,
+  apiUrl: $ENV.apiUrl,
 };
 
 /*
