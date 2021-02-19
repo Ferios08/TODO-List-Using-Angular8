@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from '../models/card';
-import { CardsService } from '../services/cards.service';
 
 @Component({
   selector: 'app-list',
@@ -10,58 +8,26 @@ import { CardsService } from '../services/cards.service';
 export class ListComponent implements OnInit {
   public items = [];
   public newTask;
-  public elements = 0;
 
-  constructor(
-    private cardsService: CardsService,
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-    this.getAll();
-    
   }
 
 
-  public addToList() {
+    public addToList() {
     if (this.newTask == '') {
     }
     else {
       this.items.push(this.newTask);
-
-      // push to database
-      return new Promise((resolve, reject) => {
-        this.cardsService.add({ "task": this.newTask }).subscribe(data => {
-          this.newTask = '';
-          this.ngOnInit();
-        });
-      });
-
+      this.newTask = '';
     }
     console.log(this.items)
   }
 
 
   public deleteTask(index) {
-    this.cardsService.delete(this.items[index].id).subscribe((response) => {
-      // console.log("deleted");
+    this.items.splice(index, 1); 
+   }
 
-    });
-    this.ngOnInit();
-  }
-
-
-
-
-  getAll(): any {
-    return new Promise((resolve, reject) => {
-      this.cardsService.getAll().subscribe(data => {
-        resolve(data);
-        this.items = data as Card[];
-        console.log(data);
-        this.elements = Object.keys(data).length;
-        console.log("You have " + this.elements + " tasks :)");
-        
-      });
-    });
-  }
 }
